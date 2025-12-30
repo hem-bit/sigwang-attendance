@@ -117,16 +117,6 @@ export async function POST(request) {
             });
           }
 
-          // 이미 출석했는지 확인
-          const currentAttendance = String(row[attendanceCol] || '').toUpperCase();
-          if (currentAttendance === 'TRUE') {
-            return NextResponse.json({
-              success: false,
-              message: '이미 출석 체크를 완료하셨습니다.',
-              alreadyChecked: true,
-            });
-          }
-
           // 교인구분 확인
           const memberType = String(row[memberTypeCol] || '').trim();
 
