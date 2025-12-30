@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 // Google Sheets 설정
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
-const SHEET_NAMES = ['청년1부', '청년2부', '장년부', '주일학교', '신촌캠', '교역자'];
+const SHEET_NAMES = ['청년1부', '청년2부', '장년부', '주일학교', '신촌캠', '교역자', '시선교회'];
 
 // Google Sheets API 클라이언트 생성
 function getGoogleSheetsClient() {
@@ -97,7 +97,7 @@ export async function POST(request) {
           attendanceCol
         });
 
-        // 컬럼 확인
+        // 컬럼 확인 (필수 컬럼만)
         if (nameCol === -1 || birthCol === -1 || phoneCol === -1 || 
             memberTypeCol === -1 || attendanceCol === -1) {
           continue;
