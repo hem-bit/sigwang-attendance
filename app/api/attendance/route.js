@@ -60,10 +60,10 @@ export async function POST(request) {
     // 모든 시트를 순회하며 회원 검색
     for (const sheetName of SHEET_NAMES) {
       try {
-        // 시트 데이터 가져오기
+        // 시트 데이터 가져오기 (J열까지 확장)
         const response = await sheets.spreadsheets.values.get({
           spreadsheetId: SPREADSHEET_ID,
-          range: `${sheetName}!A:H`,
+          range: `${sheetName}!A:J`,
         });
 
         const rows = response.data.values;
