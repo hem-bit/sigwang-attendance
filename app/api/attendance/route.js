@@ -60,7 +60,7 @@ export async function POST(request) {
     // 모든 시트를 순회하며 회원 검색
     for (const sheetName of SHEET_NAMES) {
       try {
-        // 시트 데이터 가져오기 (J열까지 확장)
+        // 시트 데이터 가져오기
         const response = await sheets.spreadsheets.values.get({
           spreadsheetId: SPREADSHEET_ID,
           range: `${sheetName}!A:J`,
@@ -74,11 +74,28 @@ export async function POST(request) {
 
         // 헤더 행
         const headers = rows[0];
+        
+        // 디버깅: 모든 헤더 출력
+        console.log(`Sheet: ${sheetName}, Headers:`, headers);
+        
         const nameCol = headers.indexOf('이름');
         const birthCol = headers.indexOf('생년월일');
         const phoneCol = headers.indexOf('연락처');
+        const singeupCol = headers.indexOf('신급');
+        const educationCol = headers.indexOf('새가족교육');
         const memberTypeCol = headers.indexOf('교인구분');
         const attendanceCol = headers.indexOf('출석');
+        
+        // 디버깅: 컬럼 인덱스 출력
+        console.log('Column indices:', {
+          nameCol,
+          birthCol,
+          phoneCol,
+          singeupCol,
+          educationCol,
+          memberTypeCol,
+          attendanceCol
+        });
 
         // 컬럼 확인
         if (nameCol === -1 || birthCol === -1 || phoneCol === -1 || 
@@ -119,6 +136,19 @@ export async function POST(request) {
 
           // 교인구분 확인
           const memberType = String(row[memberTypeCol] || '').trim();
+          const singeup = String(row[singeupCol] || '').trim();
+          const education = String(row[educationCol] || '').trim();
+
+          // 디버깅: 실제 데이터 로깅
+          console.log('Debug - Row data:', {
+            name: rowName,
+            memberType,
+            singeup,
+            education,
+            singeupCol,
+            educationCol,
+            headers
+          });
 
           if (memberType !== '정회원' && memberType !== '준회원' && memberType !== '새가족') {
             return NextResponse.json({
@@ -145,6 +175,8 @@ export async function POST(request) {
             success: true,
             message: `${name}님, 출석이 완료되었습니다!`,
             memberType: memberType,
+            singeup: singeup,
+            education: education,
             department: sheetName,
             showLink: memberType === '정회원',
           });
