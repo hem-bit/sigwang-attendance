@@ -301,7 +301,7 @@ export default function Home() {
                 <div className={styles.infoItem}>
                   <div className={styles.infoLabel}>신급</div>
                   <div className={
-                    singeup === '세례교인' || singeup === '입교' 
+                    singeup === '세례교인' || singeup === '입교' || singeup === '언약회원'
                       ? styles.textGreen 
                       : styles.textPink
                   }>{singeup || '-'}</div>
