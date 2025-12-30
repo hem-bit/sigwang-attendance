@@ -298,26 +298,22 @@ export default function Home() {
             <div className={styles.memberTypeText}>{memberType}</div>
             <div className={styles.additionalInfo}>
               <div className={styles.infoRow}>
-                {singeup && (
-                  <div className={styles.infoItem}>
-                    <div className={styles.infoLabel}>신급</div>
-                    <div className={
-                      singeup === '세례교인' || singeup === '입교인' 
-                        ? styles.textGreen 
-                        : styles.textPink
-                    }>{singeup}</div>
-                  </div>
-                )}
-                {(education || education === '') && (
-                  <div className={styles.infoItem}>
-                    <div className={styles.infoLabel}>새가족교육</div>
-                    <div className={
-                      education === '이수'
-                        ? styles.textGreen 
-                        : styles.textPink
-                    }>{education || '미이수'}</div>
-                  </div>
-                )}
+                <div className={styles.infoItem}>
+                  <div className={styles.infoLabel}>신급</div>
+                  <div className={
+                    singeup === '세례교인' || singeup === '입교인' 
+                      ? styles.textGreen 
+                      : styles.textPink
+                  }>{singeup || '-'}</div>
+                </div>
+                <div className={styles.infoItem}>
+                  <div className={styles.infoLabel}>새가족교육</div>
+                  <div className={
+                    education === '이수' || education === '기존'
+                      ? styles.textGreen 
+                      : styles.textPink
+                  }>{education || '-'}</div>
+                </div>
               </div>
             </div>
           </div>
