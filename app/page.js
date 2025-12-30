@@ -16,6 +16,8 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [memberType, setMemberType] = useState('');
+  const [singeup, setSingeup] = useState('');
+  const [education, setEducation] = useState('');
   const [showLink, setShowLink] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -53,6 +55,8 @@ export default function Home() {
     setLoading(true);
     setMessage('');
     setMemberType('');
+    setSingeup('');
+    setEducation('');
     setShowLink(false);
 
     try {
@@ -73,6 +77,8 @@ export default function Home() {
       if (result.success) {
         showMessage(result.message, 'success');
         setMemberType(result.memberType);
+        setSingeup(result.singeup || '');
+        setEducation(result.education || '');
         setShowLink(result.showLink);
         
         // 폼 리셋
@@ -290,6 +296,30 @@ export default function Home() {
           <div className={styles.memberTypeBox}>
             <p className={styles.memberTypeLabel}>교인구분</p>
             <div className={styles.memberTypeText}>{memberType}</div>
+            <div className={styles.additionalInfo}>
+              <div className={styles.infoRow}>
+                {singeup && (
+                  <div className={styles.infoItem}>
+                    <div className={styles.infoLabel}>신급</div>
+                    <div className={
+                      singeup === '세례교인' || singeup === '입교인' 
+                        ? styles.textGreen 
+                        : styles.textPink
+                    }>{singeup}</div>
+                  </div>
+                )}
+                {(education || education === '') && (
+                  <div className={styles.infoItem}>
+                    <div className={styles.infoLabel}>새가족교육</div>
+                    <div className={
+                      education === '이수'
+                        ? styles.textGreen 
+                        : styles.textPink
+                    }>{education || '미이수'}</div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
 
