@@ -323,7 +323,7 @@ export default function Home() {
           <div className={styles.linkBox}>
             <p>📱 정회원 단톡방에 입장해 주세요</p>
             <a
-              href="https://invite.kakao.com/tc/JPBgcLntny"
+              href="https://open.kakao.com/o/gZCvla9h"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.linkBtn}
